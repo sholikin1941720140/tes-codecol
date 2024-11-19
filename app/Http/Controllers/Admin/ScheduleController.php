@@ -15,9 +15,21 @@ class ScheduleController extends Controller
         $data = DB::table('schedules as sc')
                     ->join('detail_schedules as ds', 'sc.id', '=', 'ds.schedule_id')
                     ->join('employees as emp', 'sc.employee_id', '=', 'emp.id')
-                    ->join('users as u', 'emp.user_id', '=', 'u.id')
-                    ->select('sc.*', 'ds.*', 'emp.*', 'u.*')
-                    ->get();
+                    ->join('users as us', 'emp.user_id', '=', 'us.id')
+                    ->select('sc.*', 'ds.day', 'us.name')
+                    ->get()
+                    ->groupBy('id')
+                    ->map(function ($group) {
+                        $schedule = $group->first();
+                        return [
+                            'id' => $schedule->id,
+                            'name' => $schedule->name,
+                            'time_in' => $schedule->time_in,
+                            'time_out' => $schedule->time_out,
+                            'day' => $group->pluck('day')->toArray(),
+                        ];
+                    })
+                    ->values();
         // return response()->json($data);
 
         return view('admin.schedule.index', compact('data'));
@@ -27,6 +39,7 @@ class ScheduleController extends Controller
     {
         $data = DB::table('users')
                     ->where('role_id', 2)
+                    ->where('status', 'active')
                     ->select('id', 'name')
                     ->get();
         // return response()->json($data); 

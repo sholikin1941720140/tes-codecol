@@ -58,23 +58,33 @@
                         <th>Aksi</th>
                     </tr>
                     </thead>
-                    {{-- @foreach($data as $key => $item)
+                    @foreach($data as $key => $item)
                         <tr>
-                            <td>{{$key+1}}</td>
-                            <td>{{$item->name}}</td>
+                            <td>{{$key + 1}}</td>
+                            <td>{{$item['name']}}</td>
                             <td>
-                                <b>Jam Masuk : </b> {{$item->jam_masuk}}<br>
-                                <b>Jam Keluar : </b> {{$item->jam_keluar}}<br>
+                                <b>Jam Masuk : </b> {{$item['time_in']}}<br>
+                                <b>Jam Keluar : </b> {{$item['time_out']}}<br>
                             </td>
                             <td>
-                                @foreach($item->hari as $hari)
-                                    <span class="badge badge-primary">{{$hari->name}}</span>
-                                @endforeach
+                                @foreach($item['day'] as $key => $day)
+                                    {{$key + 1}}. {{$day}}<br>
+                                @endforeach                        
                             </td>
                             <td>
+                                <a class="btn btn-primary btn-sm" 
+                                    href="{{url('/schedule/edit/'.$item['id'])}}">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm ondelete"
+                                    href="{{url('/schedule/delete/'.$item['id'])}}"> 
+                                    <i class="fas fa-trash"></i>
+                                    Delete
+                                </a>
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </table>
                 </div>
                 <!-- /.card-body -->
