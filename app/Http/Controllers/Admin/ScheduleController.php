@@ -82,4 +82,12 @@ class ScheduleController extends Controller
 
         return redirect()->route('schedule')->with('success', 'Data berhasil disimpan');
     }
+
+    public function destroy($id)
+    {
+        DB::table('schedules')->where('id', $id)->delete();
+        DB::table('detail_schedules')->where('schedule_id', $id)->delete();
+
+        return redirect()->route('schedule')->with('success', 'Data berhasil dihapus');
+    }
 }
