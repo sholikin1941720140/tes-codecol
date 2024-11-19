@@ -15,21 +15,31 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-controlsidebar-slide="true" style="cursor: pointer;color: rgb(255, 255, 255);" 
-                href="{{ url('/logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();" role="button">
+            <a class="nav-link" data-controlsidebar-slide="true" style="cursor: pointer;color: rgb(255, 255, 255);"
+                href="javascript:void(0);" onclick="logout()" role="button">
                 <b>Keluar</b> &nbsp;
                 <i class="fas fa-sign-out-alt"></i>
             </a>
-            <form id="logout-form" action="{{url('/logout')}}" method="GET" class="d-none">
-            @csrf
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-            </form>
-        </li>
+        </li>        
     </ul>
 </nav>
+<script>
+    function logout() {
+        $.ajax({
+            url: '{{ url("/logout") }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                if (response.success) { 
+                    window.location.href = '{{ url("/") }}';
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('Terjadi kesalahan, silakan coba lagi.');
+            }
+        });
+    }
+</script>
 <!-- /.navbar -->

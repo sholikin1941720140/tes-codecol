@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('detail_schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('schedule_id');
-            $table->time('day');
+            $table->string('day');
             $table->timestamps();
 
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');

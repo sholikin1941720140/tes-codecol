@@ -13,7 +13,7 @@
    <li class="nav-item">
       <a href="{{ url('/admin/jadwal') }}"
          class="nav-link {{ Request::segment(1) == 'absensi' && Request::segment(2) == 'dosen' ? 'active' : '' }}">
-         <i class="fas fa-money-bill-wave-alt"></i>
+         <i class="fas fa-calendar-alt"></i>
          <p>&nbsp; Jadwal</p>
       </a>
    </li>
@@ -21,17 +21,15 @@
    <li class="nav-item">
       <a href="{{url('/user')}}"
          class="nav-link {{Request::segment(1) == 'user' ? 'active' : ''}}">
-         <i class="fa-solid fa-clipboard-user"></i>
-         <p> &nbsp;
-            Absensi
-         </p>
+         <i class="fas fa-calendar-check"></i>
+         <p> &nbsp; Absensi </p>
       </a>
    </li>
 
    <li class="nav-item">
       <a href="{{ url('/admin/laporan') }}"
          class="nav-link {{ Request::segment(1) == 'absensi' && Request::segment(2) == 'dosen' ? 'active' : '' }}">
-         <i class="fas fa-calendar-check"></i>
+         <i class="fas fa-clipboard-list"></i>
          <p>&nbsp; Laporan Absensi</p>
       </a>
    </li>

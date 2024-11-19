@@ -46,6 +46,11 @@
                         <div class="alert-text">{{ucwords($message)}}</div>
                     </div>
                 @endif
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <form id="login-form">
                     <div id="responseMessage"></div>
                     <div class="input-group mb-3">

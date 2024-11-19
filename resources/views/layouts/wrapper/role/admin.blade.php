@@ -11,17 +11,17 @@
    </li>
 
    <li class="nav-item">
-      <a href="{{ url('/admin/jadwal') }}"
-         class="nav-link {{ Request::segment(1) == 'absensi' && Request::segment(2) == 'dosen' ? 'active' : '' }}">
-         <i class="fas fa-money-bill-wave-alt"></i>
+      <a href="{{ url('/schedule') }}"
+         class="nav-link {{ Request::segment(1) == 'jadwal' && Request::segment(2) == 'admin' ? 'active' : '' }}">
+         <i class="fas fa-calendar-alt"></i>
          <p>&nbsp; Jadwal</p>
       </a>
    </li>
 
    <li class="nav-item">
-      <a href="{{ url('/admin/laporan') }}"
-         class="nav-link {{ Request::segment(1) == 'absensi' && Request::segment(2) == 'dosen' ? 'active' : '' }}">
-         <i class="fas fa-calendar-check"></i>
+      <a href="{{ url('/laporan') }}"
+         class="nav-link {{ Request::segment(1) == 'laporan absensi' && Request::segment(2) == 'admin' ? 'active' : '' }}">
+         <i class="fas fa-clipboard-list"></i>
          <p>&nbsp; Laporan Absensi</p>
       </a>
    </li>

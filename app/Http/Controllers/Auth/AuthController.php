@@ -55,10 +55,18 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        if (!Auth::check()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda belum login, tidak perlu logout.'
+            ], 401);
+        }
+
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->flash('success', 'Anda berhasil Logout');
 
         return response()->json([
             'success' => true,
