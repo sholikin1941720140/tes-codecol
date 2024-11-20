@@ -39,21 +39,22 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validateData)->withInput();
         }
 
-        $created_at = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
         $userId = DB::table('users')->insertGetId([
             'role_id' => $request->role,
             'name' => $request->name,
             'status' => $request->status,
             'email' => $request->email,
             'password' => Hash::make('password'),
-            'created_at' => $created_at,
-            'updated_at' => $created_at,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         DB::table('employees')->insert([
             'user_id' => $userId,
             'dob' => $request->dob,
             'city' => $request->city,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         return redirect()->route('user')->with('success', 'Data berhasil disimpan');
@@ -77,18 +78,18 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validateData)->withInput();
         }
 
-        $updated_at = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
         DB::table('users')->where('id', $id)->update([
             'role_id' => $request->role,
             'name' => $request->name,
             'status' => $request->status,
             'email' => $request->email,
-            'updated_at' => $updated_at,
+            'updated_at' => Carbon::now(),
         ]);
 
         DB::table('employees')->where('user_id', $id)->update([
             'dob' => $request->dob,
             'city' => $request->city,
+            'updated_at' => Carbon::now(),
         ]);
 
         return redirect()->route('user')->with('success', 'Data berhasil diupdate');

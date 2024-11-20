@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Employee\AttendanceController;
 
 
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/schedule/edit/{id}', [ScheduleController::class, 'edit']);
     Route::post('/schedule/update/{id}', [ScheduleController::class, 'update']);
     Route::get('/schedule/delete/{id}', [ScheduleController::class, 'destroy']);
+    Route::get('/report', [ReportController::class, 'index']);
 
     //employee-schedule and attendance
     Route::get('/employee-schedule', [AttendanceController::class, 'index']);
@@ -46,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/submit-leave', [AttendanceController::class, 'submitLeave']);
     Route::get('/check-submit-attendance', [AttendanceController::class, 'checkSubmitAttendance']);
     Route::get('/check-submit-leave', [AttendanceController::class, 'checkSubmitLeave']);
+    Route::get('/employee-report', [AttendanceController::class, 'report']);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

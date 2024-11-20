@@ -61,21 +61,20 @@ class ScheduleController extends Controller
             return redirect()->back()->withErrors($validateData)->withInput();
         }
 
-        $created_at = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
         $scId = DB::table('schedules')->insertGetId([
             'user_id' => $request->user,
             'time_in' => $request->checkin,
             'time_out' => $request->checkout,
-            'created_at' => $created_at,
-            'updated_at' => $created_at,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         foreach($request->day as $key => $value) {
             DB::table('detail_schedules')->insert([
                 'schedule_id' => $scId,
                 'day' => $request->day[$key],
-                'created_at' => $created_at,
-                'updated_at' => $created_at,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
         }
 
@@ -123,12 +122,11 @@ class ScheduleController extends Controller
             return redirect()->back()->withErrors($validateData)->withInput();
         }
 
-        $updated_at = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
         DB::table('schedules')->where('id', $request->id)->update([
             'user_id' => $request->user_id,
             'time_in' => $request->checkin,
             'time_out' => $request->checkout,
-            'updated_at' => $updated_at,
+            'updated_at' => Carbon::now(),
         ]);
 
         DB::table('detail_schedules')->where('schedule_id', $request->id)->delete();
@@ -136,8 +134,8 @@ class ScheduleController extends Controller
             DB::table('detail_schedules')->insert([
                 'schedule_id' => $request->id,
                 'day' => $request->day[$key],
-                'created_at' => $updated_at,
-                'updated_at' => $updated_at,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
         }
 

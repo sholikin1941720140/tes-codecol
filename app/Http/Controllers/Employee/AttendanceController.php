@@ -31,12 +31,11 @@ class AttendanceController extends Controller
                     ->values();
         // return response()->json($data);
 
-        return view('employee.schedule-index', compact('data'));
+        return view('employee.schedule', compact('data'));
     }
 
     public function attendanceView()
     {
-        Carbon::setlocale('id');
         $user = auth()->user();
         if($user->status == 'inactive') {
             return redirect()->route('dashboard')->with('error', 'Anda tidak bisa melakukan absensi karena status anda tidak aktif');
@@ -66,7 +65,7 @@ class AttendanceController extends Controller
         });
         // return response()->json($data);
 
-        return view('employee.attendance-index', compact('data', 'now', 'hasSchedule'));
+        return view('employee.attendance', compact('data', 'now', 'hasSchedule'));
     }
 
     public function submitAttendance(Request $request)
@@ -224,5 +223,16 @@ class AttendanceController extends Controller
                 'message' => 'Anda belum absensi hari ini'
             ], 200);
         }
+    }
+
+    public function report()
+    {
+        $user = auth()->user();
+        $data = DB::table('attendances')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        // return response()->json($data);
+
+        return view('employee.report', compact('data'));
     }
 }

@@ -27,8 +27,8 @@
    </li>
 
    <li class="nav-item">
-      <a href="{{ url('/admin/laporan') }}"
-         class="nav-link {{ Request::segment(1) == 'absensi' && Request::segment(2) == 'dosen' ? 'active' : '' }}">
+      <a href="{{ url('/employee-report') }}"
+         class="nav-link {{ Request::segment(1) == 'employee-report' ? 'active' : '' }}">
          <i class="fas fa-clipboard-list"></i>
          <p>&nbsp; Laporan Absensi</p>
       </a>

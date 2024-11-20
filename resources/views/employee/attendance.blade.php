@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('custom-css')
-<link rel="stylesheet" href="{{url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-<!-- Select2 -->
-<link rel="stylesheet" href="{{url('plugins/select2/css/select2.min.css')}}">
-<link rel="stylesheet" href="{{url('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endsection
 
 @section('content')
@@ -77,7 +71,7 @@
                 success: function(data) {
                     // console.log(data);
                     if(data.status == 'success') {
-                        $('#submitAttendance').removeClass('btn-primary').addClass('btn-success').attr('disabled', true);
+                        $('#submitAttendance').removeClass('btn-primary').addClass('btn-success').prop('disabled', true);
                     }
                 },
                 error: function(xhr, status, err) {
@@ -93,7 +87,7 @@
                 success: function(data) {
                     // console.log(data);
                     if(data.status == 'success') {
-                        $('#submitLeave').removeClass('btn-primary').addClass('btn-success').attr('disabled', true);
+                        $('#submitLeave').removeClass('btn-primary').addClass('btn-success').prop('disabled', true);
                     }
                 },
                 error: function(xhr, status, err) {
@@ -106,7 +100,6 @@
         $('#submitAttendance').on('click', function() {
             var time_in = $('input[name="time_in"]').val();
             var time_out = $('input[name="time_out"]').val();
-            console.log(time_in, time_out);
 
             $.ajax({
                 url: '/submit-attendance',
@@ -118,26 +111,13 @@
                 },
                 success: function(data) {
                     console.log(data);
-                    if(data.status === 'present') {
-                        $('#submitAttendance').removeClass('btn btn-primary').addClass('btn btn-success').attr('disabled', true);
-                        var successMessage = data.message;
-                        setTimeout(function() {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: successMessage
-                            });
-                        }, 500);
-                    } else if (data.status === 'late') {
-                        $('#submitAttendance').removeClass('btn btn-primary').addClass('btn btn-success').attr('disabled', true);
-                        var successMessage = data.message;
-                        setTimeout(function() {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: successMessage
-                            });
-                        }, 500);
+                    if (data.status === 'present' || data.status === 'late') {
+                        $('#submitAttendance').removeClass('btn-primary').addClass('btn-success').prop('disabled', true);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message
+                        });
                     }
                 },
                 error: function(xhr, status, err) {
@@ -156,7 +136,6 @@
         $('#submitLeave').on('click', function() {
             var time_in = $('input[name="time_in"]').val();
             var time_out = $('input[name="time_out"]').val();
-            console.log(time_in, time_out);
 
             $.ajax({
                 url: '/submit-leave',
@@ -169,15 +148,13 @@
                 success: function(data) {
                     console.log(data);
                     if(data.status === 'success') {
-                        $('#submitLeave').removeClass('btn btn-primary').addClass('btn btn-success').attr('disabled', true);
+                        $('#submitLeave').removeClass('btn btn-primary').addClass('btn btn-success').prop('disabled', true);
                         var successMessage = data.message;
-                        setTimeout(function() {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: successMessage
-                            });
-                        }, 500);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: successMessage
+                        });
                     }
                 },
                 error: function(xhr, status, error) {
