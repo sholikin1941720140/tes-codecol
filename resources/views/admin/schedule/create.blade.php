@@ -100,7 +100,6 @@
     <script>
         let scheduleCount = 1;
 
-        // Tambah jadwal hari baru
         function addSchedule() {
             scheduleCount++;
             const scheduleContainer = document.getElementById('schedule-container');
@@ -126,7 +125,6 @@
             scheduleContainer.insertAdjacentHTML('beforeend', newSchedule);
         }
 
-        // Hapus jadwal
         function removeSchedule(id) {
             document.getElementById(`schedule-${id}`).remove();
         }

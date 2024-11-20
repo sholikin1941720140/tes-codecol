@@ -12,18 +12,18 @@ class Schedule extends Model
     protected $table = 'schedules';
 
     protected $fillable = [
-        'employee_id',
+        'user_id',
         'time_in',
         'time_out',
     ];
 
-    public function employee()
+    public function user()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function detail_schedule()
     {
-        return $this->hasMany(DetailSchedule::class);
+        return $this->hasMany(DetailSchedule::class, 'schedule_id', 'id');
     }
 }

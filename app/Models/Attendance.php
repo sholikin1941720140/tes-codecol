@@ -12,15 +12,14 @@ class Attendance extends Model
     protected $table = 'attendances';
 
     protected $fillable = [
-        'employee_id',
+        'user_id',
         'time_in',
         'time_out',
         'status',
     ];
 
-
-    public function employee()
+    public function user()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

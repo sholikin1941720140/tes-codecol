@@ -11,16 +11,16 @@
    </li>
 
    <li class="nav-item">
-      <a href="{{ url('/admin/jadwal') }}"
-         class="nav-link {{ Request::segment(1) == 'absensi' && Request::segment(2) == 'dosen' ? 'active' : '' }}">
+      <a href="{{ url('/employee-schedule') }}"
+         class="nav-link {{ Request::segment(1) == 'employee-schedule' ? 'active' : '' }}">
          <i class="fas fa-calendar-alt"></i>
          <p>&nbsp; Jadwal</p>
       </a>
    </li>
 
    <li class="nav-item">
-      <a href="{{url('/user')}}"
-         class="nav-link {{Request::segment(1) == 'user' ? 'active' : ''}}">
+      <a href="{{url('/employee-attendance')}}"
+         class="nav-link {{Request::segment(1) == 'employee-attendance' ? 'active' : ''}}">
          <i class="fas fa-calendar-check"></i>
          <p> &nbsp; Absensi </p>
       </a>

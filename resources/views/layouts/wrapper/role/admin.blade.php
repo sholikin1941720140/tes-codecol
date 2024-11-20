@@ -12,15 +12,15 @@
 
    <li class="nav-item">
       <a href="{{ url('/schedule') }}"
-         class="nav-link {{ Request::segment(1) == 'jadwal' && Request::segment(2) == 'admin' ? 'active' : '' }}">
+         class="nav-link {{ Request::segment(1) == 'schedule' ? 'active' : '' }}">
          <i class="fas fa-calendar-alt"></i>
          <p>&nbsp; Jadwal</p>
       </a>
    </li>
 
    <li class="nav-item">
-      <a href="{{ url('/laporan') }}"
-         class="nav-link {{ Request::segment(1) == 'laporan absensi' && Request::segment(2) == 'admin' ? 'active' : '' }}">
+      <a href="{{ url('/report') }}"
+         class="nav-link {{ Request::segment(1) == 'report' ? 'active' : '' }}">
          <i class="fas fa-clipboard-list"></i>
          <p>&nbsp; Laporan Absensi</p>
       </a>
