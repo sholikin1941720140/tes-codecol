@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#1166d8;">
   <!-- Brand Logo -->
   <a href="/dashboard" class="brand-link" style="border-color: white;">
-    <img src="{{url('dist/img/logo.jpg')}}" alt="SIMAS Logo" class="brand-image img-circle elevation-3" 
+    <img src="{{url('dist/img/logo.jpg')}}" alt="Logo" class="brand-image img-circle elevation-3" 
     style="opacity: .8;background-color: white;">
     <span class="brand-text font-weight-light">SIAbKa</span>
   </a>
@@ -15,7 +15,7 @@
       User:
       </div>
       <div class="info d-flex flex-column" style="white-space: normal;">
-        <a href="/dashboard" class="d-block">
+        <a href="/profile" class="d-block">
           <b>{{ Auth::user()->name }}</b>
         </a>
       </div>

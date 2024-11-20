@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Employee\AttendanceController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -49,6 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/check-submit-attendance', [AttendanceController::class, 'checkSubmitAttendance']);
     Route::get('/check-submit-leave', [AttendanceController::class, 'checkSubmitLeave']);
     Route::get('/employee-report', [AttendanceController::class, 'report']);
+
+    //profile
+    Route::get('/profile', [ProfileController::class, 'index']);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

@@ -60,7 +60,7 @@
                     @foreach($data as $key => $item)
                         <tr>
                             <td>{{$key + 1}}</td>
-                            <td>{{\Carbon\Carbon::make($item->created_at)->isoFormat('MMMM YYYY')}}</td>
+                            <td>{{\Carbon\Carbon::make($item->created_at)->isoFormat('DD MMMM YYYY')}}</td>
                             <td>
                                 <b>Absen Masuk : </b> {{$item->time_in}}<br>
                                 <b>Absen Keluar : </b> {{$item->time_out}}<br>

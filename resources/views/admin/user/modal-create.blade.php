@@ -47,6 +47,7 @@
                                         <option selected disabled>-- Pilih Status --</option>
                                         <option value="active">Aktif</option>
                                         <option value="inactive">Tidak Aktif</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

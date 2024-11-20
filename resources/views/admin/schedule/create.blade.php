@@ -67,7 +67,7 @@
                                         <div id="schedule-container">
                                             <div class="row mb-2" id="schedule-1">
                                                 <div class="col-4">
-                                                    <select class="form-control" name="day[]" required>
+                                                    <select class="form-control" name="day[]" required onchange="updateDisabled()">
                                                         <option selected disabled>Pilih Hari</option>
                                                         <option value="Senin">Senin</option>
                                                         <option value="Selasa">Selasa</option>
@@ -102,11 +102,11 @@
 
         function addSchedule() {
             scheduleCount++;
-            const scheduleContainer = document.getElementById('schedule-container');
+            const container = document.getElementById('schedule-container');
             const newSchedule = `
                 <div class="row mb-2" id="schedule-${scheduleCount}">
                     <div class="col-4">
-                        <select class="form-control" name="day[]" required>
+                        <select class="form-control" name="day[]" required onchange="updateDisabled()">
                             <option selected disabled>Pilih Hari</option>
                             <option value="Senin">Senin</option>
                             <option value="Selasa">Selasa</option>
@@ -122,11 +122,31 @@
                     </div>
                 </div>
             `;
-            scheduleContainer.insertAdjacentHTML('beforeend', newSchedule);
+            container.insertAdjacentHTML('beforeend', newSchedule);
+            updateDisabled();
         }
 
         function removeSchedule(id) {
             document.getElementById(`schedule-${id}`).remove();
+            updateDisabled();
+        }
+
+        function updateDisabled() {
+            const selectedDay = Array.from(document.querySelectorAll('select[name="day[]"]'))
+                .map(select => select.value)
+                .filter(day => day);
+
+            const allSelect = document.querySelectorAll('select[name="day[]"]');
+            allSelect.forEach(select => {
+                const options = select.querySelectorAll('option');
+                options.forEach(option => {
+                    if (selectedDay.includes(option.value) && option.value !== select.value) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                });
+            });
         }
 
         document.getElementById('addSchedule').addEventListener('click', addSchedule);

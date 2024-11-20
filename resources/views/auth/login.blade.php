@@ -36,21 +36,11 @@
         <!-- /.login-logo -->
         <div class="card card-outline">
             <div class="card-header text-center d-flex justify-content-center align-items-center">
-                <img src="{{url('dist/img/logo.jpg')}}" alt="SIMAS Logo" class="brand-image img-circle elevation-3" style="width: 40px; height: 40px;">
+                <img src="{{url('dist/img/logo.jpg')}}" alt="Logo" class="brand-image img-circle elevation-3" style="width: 40px; height: 40px;">
                 <a href="/" class="h1 ml-2"><b>SIAbKa</b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Silahkan Login Terlebih Dahulu</p>
-                @if($message=Session::get('error'))
-                    <div class="alert alert-danger" role="alert">
-                        <div class="alert-text">{{ucwords($message)}}</div>
-                    </div>
-                @endif
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
                 <form id="login-form">
                     <div id="responseMessage"></div>
                     <div class="input-group mb-3">

@@ -25,7 +25,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-
+                    @if(auth()->user()->role_id == '1')
                     <div class="col-lg-6 col-6">
                         <div class="small-box bg-success">
                             <div class="inner">
@@ -48,6 +48,34 @@
                             </div>
                         </div>
                     </div>
+                    @elseif (auth()->user()->role_id == '2')
+                    <div class="col-lg-6 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                @if(auth()->user()->status == 'active')
+                                        <h3>Aktif</h3>
+                                    @else
+                                        <h3>Tidak Aktif</h3>
+                                    @endif
+                                <p>Status Akun</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-6">
+                        <div class="small-box bg-pink">
+                            <div class="inner">
+                                <h3>{{ auth()->user()->name }}</h3>
+                                <p>"Tetap Semangat! Sukses Dimulai dari Langkah Hari Ini."</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-happy-outline"></i>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
                 <!-- /.row (main row) -->
             </div>

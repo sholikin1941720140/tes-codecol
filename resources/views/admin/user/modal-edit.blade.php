@@ -47,6 +47,7 @@
                                         <option selected disabled>-- Pilih Status --</option>
                                         <option value="active" {{$item->status == 'active' ? 'selected' : ''}}>Aktif</option>
                                         <option value="inactive" {{$item->status == 'inactive' ? 'selected' : ''}}>Tidak Aktif</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

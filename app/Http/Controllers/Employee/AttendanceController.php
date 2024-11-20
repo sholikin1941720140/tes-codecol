@@ -9,6 +9,11 @@ use DB;
 
 class AttendanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $id = auth()->id();
@@ -229,6 +234,7 @@ class AttendanceController extends Controller
     {
         $user = auth()->user();
         $data = DB::table('attendances')
+                ->where('user_id', $user->id)
                 ->orderBy('created_at', 'desc')
                 ->get();
         // return response()->json($data);

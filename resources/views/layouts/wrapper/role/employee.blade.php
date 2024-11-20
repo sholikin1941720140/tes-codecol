@@ -33,6 +33,16 @@
          <p>&nbsp; Laporan Absensi</p>
       </a>
    </li>
+
+   <li class="nav-item">
+      <a href="{{url('/profile')}}"
+         class="nav-link {{Request::segment(1) == 'profile' ? 'active' : ''}}">
+         <i class="fas fa-id-badge"></i>
+         <p> &nbsp;
+            Profile
+         </p>
+      </a>
+   </li>
 </ul>
 
 <style>

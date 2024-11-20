@@ -65,7 +65,7 @@
                                             @foreach($data['day'] as $key => $value)
                                             <div class="row mb-2" id="schedule-{{$key+1}}">
                                                 <div class="col-4">
-                                                    <select class="form-control" name="day[]" required>
+                                                    <select class="form-control" name="day[]" required onchange="updateDisabled()">
                                                         <option selected disabled>Pilih Hari</option>
                                                         <option value="Senin" {{ $value == 'Senin' ? 'selected' : '' }}>Senin</option>
                                                         <option value="Selasa" {{ $value == 'Selasa' ? 'selected' : '' }}>Selasa</option>
@@ -108,11 +108,11 @@
 
         function addSchedule() {
             scheduleCount++;
-            const scheduleContainer = document.getElementById('schedule-container');
+            const container = document.getElementById('schedule-container');
             const newSchedule = `
                 <div class="row mb-2" id="schedule-${scheduleCount}">
                     <div class="col-4">
-                        <select class="form-control" name="day[]" required>
+                        <select class="form-control" name="day[]" required onchange="updateDisabled()">
                             <option selected disabled>Pilih Hari</option>
                             <option value="Senin">Senin</option>
                             <option value="Selasa">Selasa</option>
@@ -128,16 +128,37 @@
                     </div>
                 </div>
             `;
-            scheduleContainer.insertAdjacentHTML('beforeend', newSchedule);
+            container.insertAdjacentHTML('beforeend', newSchedule);
+            updateDisabled(); // Update disabled options after adding new schedule
         }
 
         function removeSchedule(id) {
             const scheduleElement = document.getElementById(`schedule-${id}`);
             if (scheduleElement) {
                 scheduleElement.remove();
+                updateDisabled(); // Update disabled options after removing a schedule
             }
         }
 
+        function updateDisabled() {
+            const selectedDay = Array.from(document.querySelectorAll('select[name="day[]"]'))
+                .map(select => select.value)
+                .filter(day => day); // Get all selected days
+
+            const allSelect = document.querySelectorAll('select[name="day[]"]');
+            allSelect.forEach(select => {
+                const options = select.querySelectorAll('option');
+                options.forEach(option => {
+                    if (selectedDay.includes(option.value) && option.value !== select.value) {
+                        option.disabled = true; // Disable already selected days
+                    } else {
+                        option.disabled = false; // Enable options that are not selected
+                    }
+                });
+            });
+        }
+
         document.getElementById('addSchedule').addEventListener('click', addSchedule);
+        updateDisabled(); // Initial call to set disabled options based on existing selections
     </script>
 @endsection

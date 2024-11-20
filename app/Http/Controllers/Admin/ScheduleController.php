@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Validator;
 use DB;
+use App\Models\User;
 
 class ScheduleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {   
         $data = DB::table('schedules as sc')
@@ -37,10 +43,12 @@ class ScheduleController extends Controller
 
     public function create()
     {
-        $data = DB::table('users')
-                    ->where('role_id', 2)
-                    ->where('status', 'active')
-                    ->select('id', 'name')
+        $data = DB::table('users as us')
+                    ->leftJoin('schedules as sc', 'us.id', '=', 'sc.user_id')
+                    ->where('us.role_id', 2)
+                    ->where('us.status', 'active')
+                    ->whereNull('sc.user_id')
+                    ->select('us.id', 'us.name')
                     ->get();
         // return response()->json($data); 
 
